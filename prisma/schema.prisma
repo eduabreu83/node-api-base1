@@ -13,12 +13,36 @@ datasource db {
   provider = "mysql"
   url      = env("DATABASE_URL")
 }
-
+enum Role {
+  USER
+  ADMIN
+  SUPERADMIN
+}
 model User {
   //coluna  tipo     @atributo
   id        Int      @id @default(autoincrement())
+  status    Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime  @updatedAt @default(now())
+  role      Role     @default(USER)
   email     String   @unique
   name      String   @unique
-  status    Boolean @default(true) 
-  createdAt DateTime @default(now())
+  Post Post[]       //relacionamento 1:N, um usuário pode ter vários posts
+  @@map("users")    //mapeia o nome da tabela no banco de dados
 }
+
+model Post {
+  id        Int      @id @default(autoincrement())
+  title     String
+  subtitle  String
+  body      String
+  userId    Int
+  author    User     @relation(fields: [userId], references: [id])
+  @@map("posts") //mapeia o nome da tabela no banco de dados
+}
+
+
+//comando para efetuar a migração
+//npx prisma migrate dev 
+//após ao comando, o Prisma irá criar uma nova pasta dentro de migrations com o nome da migração
+//e irá atualizar o banco de dados com as alterações feitas no schema.prisma
