@@ -8,5 +8,5 @@ mainRouter.get('/ping', (req, res) => {
 });
 
 mainRouter.get('/test', (req, res) => {
-    prisma.user
+    res.json({ message: 'Test route is working!' });
 })
