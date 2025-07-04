@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { prisma } from '../libs/Prisma';
+import { prisma } from '../libs/prisma';
 
 export const mainRouter = Router();
 
