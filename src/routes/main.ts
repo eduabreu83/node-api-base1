@@ -1,6 +1,6 @@
 import { Router } from 'express';
-import { createUser, createUsers } from '../services/user';
-import { count } from 'console';
+import { createUser, createUsers,getAllUsers, getUserByEmail } from '../services/user';
+
 
 export const mainRouter = Router();
 
@@ -35,4 +35,17 @@ mainRouter.post('/users', async (req, res) => {
         { name: 'Ciclano', email: 'ciclano@example.com' }
     ]);
 res.json({result});
+});
+
+mainRouter.get('/users', async (req, res) => {
+    const users = await getAllUsers();
+    if (!users) {
+        return res.status(500).json({ error: 'Erro ao buscar os usuarios' });
+    }
+    res.json(users);
+});
+
+    mainRouter.get('/user', async (req, res) => {
+    const result = await getUserByEmail('joao@example.com');
+    res.json(result);
 });
