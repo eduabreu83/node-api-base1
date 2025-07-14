@@ -24,22 +24,32 @@ export const createUsers = async (users: Prisma.UserCreateInput[]) => {
 export const getAllUsers = async () => {
     const users = await prisma.user.findMany({
         where:{
-            name:{
-                //GT- greater the maior que = >
-                //GTE -  greater then or equal >=
-                //LT - Lower tehn =<
-                //LTE - Lower then or equal <=
-                startsWith: {'j'}
+            OR:[
+                {
+                    email:{
+                        endsWith: '@hotmail.com'
+                    }
+                },
+                    {
+                        email: {
+                            endswith:'@gmail.com'
+                        }
+                    }
+                ]
+            },
+            select: {
+                id: true,
+                name: true,
+                email: true
             }
-        },
-        select: {
-            id: true,
-            name: true,
-            email: true
-        }
     });
-    return users;
+        return users;
 }
+
+//GT- greater the maior que = >
+//GTE -  greater then or equal >=
+//LT - Lower tehn =<
+//LTE - Lower then or equal <=
 
 export const getUserByEmail = async (email: string) => {
     const user = await prisma.user.findUnique({
