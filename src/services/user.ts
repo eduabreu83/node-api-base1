@@ -46,6 +46,18 @@ export const getAllUsers = async () => {
         return users;
 }
 
+// where: {
+ //   post: {
+ //       every:{
+//            title:{
+ //               startsWith:{
+//                    'Titulo'
+//                }
+//            }
+//        }
+ //   }
+//}
+
 //GT- greater the maior que = >
 //GTE -  greater then or equal >=
 //LT - Lower tehn =<
