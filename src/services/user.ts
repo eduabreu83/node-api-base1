@@ -32,7 +32,7 @@ export const getAllUsers = async () => {
                 },
                     {
                         email: {
-                            endswith:'@gmail.com'
+                            endsWith:'@gmail.com'
                         }
                     }
                 ]
