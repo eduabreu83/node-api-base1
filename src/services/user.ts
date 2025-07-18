@@ -40,7 +40,12 @@ export const getAllUsers = async () => {
             select: {
                 id: true,
                 name: true,
-                email: true
+                email: true,
+                _count: {
+                    select: {
+                        Post: true
+                    }
+                }
             }
     });
         return users;
@@ -69,3 +74,13 @@ export const getUserByEmail = async (email: string) => {
     });
     return user;
 }
+
+
+export const updateUser = async() => {
+    const updateUser = await prisma.user.update({   
+        where: { email: 'user@example.com' },
+        data: {
+            name: 'Updated Name',
+            email: 'updated@example.com'
+        }
+    });

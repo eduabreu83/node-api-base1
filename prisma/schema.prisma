@@ -22,7 +22,7 @@ model User {
   role      Role     @default(USER)
   email     String   @unique
   name      String   @unique
-  Post Post[]       //relacionamento 1:N, um usuário pode ter vários posts
+  Post      Post[]       //relacionamento 1:N, um usuário pode ter vários posts
   @@map("users")    //mapeia o nome da tabela no banco de dados
 }
 
