@@ -9,6 +9,16 @@ export const createUser = async (data: Prisma.UserCreateInput)=> {
     }
 };  
 
+// Funáo para criar  com o upset
+export const upsertUser = async (data: Prisma.UserCreateInput) => {
+    const result = await prisma.user.upsert({
+        where: { 
+            email: data.email },
+        update: {role: 'ADMIN'},
+        create: { ...data }
+    });
+    return result;
+};
 
 export const createUsers = async (users: Prisma.UserCreateInput[]) => {
     try{
@@ -84,3 +94,5 @@ export const updateUser = async() => {
             email: 'updated@example.com'
         }
     });
+    return updateUser;
+}
