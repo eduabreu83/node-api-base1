@@ -96,3 +96,11 @@ export const updateUser = async() => {
     });
     return updateUser;
 }
+
+//funcao para deletar um usuario
+export const deleteUser = async (email: string) => {
+    const user = await prisma.user.delete({
+        where: {  email: 'updated@example.com' },
+    });
+    return user;
+}
