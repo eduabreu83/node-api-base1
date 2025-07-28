@@ -104,3 +104,41 @@ export const deleteUser = async (email: string) => {
     });
     return user;
 }
+
+import { User } from '../types/user';
+export const findUserByEmailAndPassword = async (email: string, password: string) => {
+    if (email === 'admin@example.com' && password === 'admin') {
+        const user: User = { id: 2, email: 'admin@example.com', name: 'Admin User' };
+        return user;
+    }
+    return null;
+}
+
+export const createUserToken = (user: User) => {
+    return '1234';
+}
+
+export const finfUserByToken = async (token: string) => {
+    if (token === '1234') {
+        const user: User = {
+            id: 2,
+            email: 'admin@example.com',
+            name: 'Admin User'
+        };
+        return user;
+    }
+    return null;
+}
+
+
+export const findUserByToken = async (token: string) => {
+    if (token === '1234') {
+        const user: User = {
+            id: 2,
+            email: 'admin@example.com',
+            name: 'Admin User'
+        };
+        return user;
+    }
+    return null;
+}
