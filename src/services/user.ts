@@ -1,5 +1,6 @@
 import { Prisma } from '../generated/prisma';
 import { prisma } from '../libs/prisma1';
+import jwt from 'jsonwebtoken';
 
 export const createUser = async (data: Prisma.UserCreateInput)=> {
     try {
@@ -107,7 +108,7 @@ export const deleteUser = async (email: string) => {
 
 import { User } from '../types/user';
 export const findUserByEmailAndPassword = async (email: string, password: string) => {
-    if (email === 'admin@example.com' && password === 'admin') {
+    if (email === 'admin@example.com' && password === '1234') {
         const user: User = { id: 2, email: 'admin@example.com', name: 'Admin User' };
         return user;
     }
@@ -118,7 +119,15 @@ export const createUserToken = (user: User) => {
     return '1234';
 }
 
-export const finfUserByToken = async (token: string) => {
+
+export const createUserJWT = (user: User) => {
+   const payload = {
+        id: user.id
+    }
+    return jwt.sign(payload, process.env.JWT_KEY as string);
+}
+
+export const findUserByToken = async (token: string) => {
     if (token === '1234') {
         const user: User = {
             id: 2,
@@ -130,9 +139,8 @@ export const finfUserByToken = async (token: string) => {
     return null;
 }
 
-
-export const findUserByToken = async (token: string) => {
-    if (token === '1234') {
+export const findUserById = async (id: string) => {
+    if (id === '2') {
         const user: User = {
             id: 2,
             email: 'admin@example.com',

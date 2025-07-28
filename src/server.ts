@@ -6,6 +6,7 @@ import helmet from 'helmet';
 import passport from 'passport';
 import { localStrategy } from './libs/passport-local';
 import { bearerStrategy } from './libs/passport-bearer';
+import { jwtStrategy } from './libs/passport-jwt';
 
 const server = express();
 server.use(helmet());
@@ -16,6 +17,7 @@ server.use(express.json());
 
 passport.use(localStrategy) ;
 passport.use(bearerStrategy);
+passport.use(jwtStrategy);  
 server.use(passport.initialize());
 
 server.use(mainRouter);

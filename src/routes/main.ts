@@ -2,6 +2,7 @@ import { Router } from 'express';
 import { createUser, createUsers,getAllUsers, getUserByEmail, updateUser } from '../services/user';
 import { localStrategyAuth } from '../libs/passport-local';
 import { bearerStrategyAuth } from '../libs/passport-bearer';
+import { jwtStrategyAuth } from '../libs/passport-jwt';
 
 
 export const mainRouter = Router();
@@ -72,4 +73,12 @@ mainRouter.get('/private', bearerStrategyAuth, (req, res) => {
     });
 });
 
+mainRouter.get('/privatejwt', jwtStrategyAuth ,(req, res) => {
+    res.json({
+        message: 'Welcome to the JWT API'
+    });
+});
+
 export default Router;
+
+
